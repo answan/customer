@@ -1,4 +1,4 @@
-phoneseller\PromoCancelled.class
+phoneseller\RewardCancelled.class
 phoneseller\Ordered.class
 phoneseller\CustomerViewHandler.class
 phoneseller\AbstractEvent$1.class
@@ -7,7 +7,7 @@ phoneseller\OrderCancelled.class
 phoneseller\Customer.class
 phoneseller\AbstractEvent.class
 phoneseller\CustomerApplication.class
-phoneseller\PromoCompleted.class
+phoneseller\RewardCompleted.class
 phoneseller\Shipped.class
 phoneseller\PolicyHandler.class
 phoneseller\CustomerRepository.class

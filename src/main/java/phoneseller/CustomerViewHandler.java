@@ -118,15 +118,19 @@ public class CustomerViewHandler {
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenPromoCompleted_then_UPDATE_5(@Payload PromoCompleted promoCompleted) {
-        System.out.println("update status promo completed");
+    public void whenRewardCompleted_then_UPDATE_5(@Payload RewardCompleted rewardCompleted) {
+        System.out.println("update status reward completed");
         try {
-            if (promoCompleted.isMe()) {
+            if (rewardCompleted.isMe()) {
+
+                System.out.println("rewardCompleted.isMe");
                 // view 객체 조회
-                List<Customer> customerList = customerRepository.findByOrderId(promoCompleted.getOrderId());
+                List<Customer> customerList = customerRepository.findByOrderId(rewardCompleted.getOrderId());
                 for(Customer customer : customerList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    customer.setPoint(promoCompleted.getPoint());
+                    System.out.println("rewardCompleted.getPoint()");
+                    System.out.println(rewardCompleted.getPoint());
+                    customer.setPoint(rewardCompleted.getPoint());
                     // view 레파지 토리에 save
                     customerRepository.save(customer);
 
@@ -137,15 +141,15 @@ public class CustomerViewHandler {
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenPromoCancelled_then_UPDATE_6(@Payload PromoCancelled promoCancelled) {
-        System.out.println("update status promo cancelled");
+    public void whenRewardCancelled_then_UPDATE_6(@Payload RewardCancelled rewardCancelled) {
+        System.out.println("update status reward cancelled");
         try {
-            if (promoCancelled.isMe()) {
+            if (rewardCancelled.isMe()) {
                 // view 객체 조회
-                List<Customer> customerList = customerRepository.findByOrderId(promoCancelled.getOrderId());
+                List<Customer> customerList = customerRepository.findByOrderId(rewardCancelled.getOrderId());
                 for(Customer customer : customerList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    customer.setPoint(promoCancelled.getPoint());
+                    customer.setPoint(rewardCancelled.getPoint());
                     // view 레파지 토리에 save
                     customerRepository.save(customer);
 
